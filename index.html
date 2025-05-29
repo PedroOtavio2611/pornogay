@@ -6,19 +6,21 @@
     <title>Gerenciador de Estoque</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input, button { padding: 10px; margin: 5px; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 10px; }
         th { background-color: #f4f4f4; }
         .menu { position: relative; display: inline-block; cursor: pointer; padding: 10px; font-size: 20px; }
         .menu-content { display: none; position: absolute; background: #ddd; padding: 5px; }
         .menu:hover .menu-content { display: block; }
-        button { padding: 10px; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <h1>Gerenciador de Estoque</h1>
-    
+
+    <input type="text" id="search" placeholder="Pesquisar produto..." onkeyup="searchProduct()">
+    <br>
     <input type="text" id="nome" placeholder="Nome do Produto">
     <input type="text" id="id" placeholder="ID">
     <input type="date" id="data_chegada">
@@ -67,6 +69,21 @@
                 row.insertCell(2).innerText = product.data_chegada;
                 row.insertCell(3).innerText = product.quantidade;
             });
+        }
+
+        function searchProduct() {
+            const searchTerm = document.getElementById("search").value.toLowerCase();
+            const table = document.getElementById("productTable");
+            table.innerHTML = "<tr><th>Nome</th><th>ID</th><th>Data de Chegada</th><th>Quantidade</th></tr>";
+
+            products.filter(product => product.nome.toLowerCase().includes(searchTerm))
+                .forEach(product => {
+                    let row = table.insertRow();
+                    row.insertCell(0).innerText = product.nome;
+                    row.insertCell(1).innerText = product.id;
+                    row.insertCell(2).innerText = product.data_chegada;
+                    row.insertCell(3).innerText = product.quantidade;
+                });
         }
 
         function downloadCSV() {
