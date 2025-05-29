@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador de Estoque</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        input, button { padding: 10px; margin: 5px; }
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f0f8ff; }
+        h1 { color: #2c3e50; }
+        input, button { padding: 10px; margin: 5px; border-radius: 5px; border: 1px solid #ccc; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; }
-        th { background-color: #f4f4f4; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #3498db; color: white; }
         .menu { position: relative; display: inline-block; cursor: pointer; padding: 10px; font-size: 20px; }
         .menu-content { display: none; position: absolute; background: #ddd; padding: 5px; }
         .menu:hover .menu-content { display: block; }
@@ -23,7 +24,7 @@
     <br>
     <input type="text" id="nome" placeholder="Nome do Produto">
     <input type="text" id="id" placeholder="ID">
-    <input type="date" id="data_chegada">
+    <input type="date" id="data_chegada" value="2005-01-01">
     <input type="number" id="quantidade" placeholder="Quantidade">
     <button onclick="addProduct()">Cadastrar Produto</button>
 
