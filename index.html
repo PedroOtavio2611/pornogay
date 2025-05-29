@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Estoque</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; }
+        th { background-color: #f4f4f4; }
+        .menu { position: relative; display: inline-block; cursor: pointer; padding: 10px; font-size: 20px; }
+        .menu-content { display: none; position: absolute; background: #ddd; padding: 5px; }
+        .menu:hover .menu-content { display: block; }
+        button { padding: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>Gerenciador de Estoque</h1>
+    
+    <input type="text" id="nome" placeholder="Nome do Produto">
+    <input type="text" id="id" placeholder="ID">
+    <input type="date" id="data_chegada">
+    <input type="number" id="quantidade" placeholder="Quantidade">
+    <button onclick="addProduct()">Cadastrar Produto</button>
+
+    <table id="productTable">
+        <tr>
+            <th>Nome</th>
+            <th>ID</th>
+            <th>Data de Chegada</th>
+            <th>Quantidade</th>
+        </tr>
+    </table>
+
+    <div class="menu">
+        ⋮
+        <div class="menu-content">
+            <button onclick="downloadCSV()">Baixar CSV</button>
+        </div>
+    </div>
+
+    <script>
+        let products = [];
+
+        function addProduct() {
+            const nome = document.getElementById("nome").value;
+            const id = document.getElementById("id").value;
+            const data_chegada = document.getElementById("data_chegada").value;
+            const quantidade = document.getElementById("quantidade").value;
+
+            if (nome && id && data_chegada && quantidade) {
+                products.push({ nome, id, data_chegada, quantidade });
+                updateTable();
+            }
+        }
+
+        function updateTable() {
+            const table = document.getElementById("productTable");
+            table.innerHTML = "<tr><th>Nome</th><th>ID</th><th>Data de Chegada</th><th>Quantidade</th></tr>";
+
+            products.forEach(product => {
+                let row = table.insertRow();
+                row.insertCell(0).innerText = product.nome;
+                row.insertCell(1).innerText = product.id;
+                row.insertCell(2).innerText = product.data_chegada;
+                row.insertCell(3).innerText = product.quantidade;
+            });
+        }
+
+        function downloadCSV() {
+            let csv = "Nome,ID,Data de Chegada,Quantidade\n";
+            products.forEach(product => {
+                csv += `${product.nome},${product.id},${product.data_chegada},${product.quantidade}\n`;
+            });
+
+            let blob = new Blob([csv], { type: "text/csv" });
+            let a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "estoque.csv";
+            a.click();
+        }
+    </script>
+
+</body>
+</html>
