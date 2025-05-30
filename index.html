@@ -33,7 +33,10 @@
         <option disabled selected>Mês</option>
         <script>for(let i=1; i<=12; i++) document.write(`<option value="${i}">${i}</option>`);</script>
     </select>
-    <input type="text" value="2025" readonly>
+    <select id="ano">
+        <option disabled selected>Ano</option>
+        <script>for(let i=2020; i<=2030; i++) document.write(`<option value="${i}">${i}</option>`);</script>
+    </select>
     <input type="number" id="quantidade" placeholder="Quantidade">
     <button onclick="addProduct()">Cadastrar Produto</button>
 
@@ -69,10 +72,11 @@
             const id = document.getElementById("id").value;
             const dia = document.getElementById("dia").value;
             const mes = document.getElementById("mes").value;
+            const ano = document.getElementById("ano").value;
             const quantidade = document.getElementById("quantidade").value;
-            const data_chegada = `${dia}/${mes}/2025`;
+            const data_chegada = `${dia}/${mes}/${ano}`;
 
-            if (nome && id && dia && mes && quantidade) {
+            if (nome && id && dia && mes && ano && quantidade) {
                 products.push({ nome, id, data_chegada, quantidade });
                 updateTable();
             }
