@@ -21,11 +21,11 @@
     <h1>Gerenciador de Estoque</h1>
 
     <input type="text" id="search" placeholder="Pesquisar produto..." onkeyup="searchProduct()">
+    <button onclick="generateID()">Gerar ID</button>
     <br>
     <input type="text" id="nome" placeholder="Nome do Produto">
     <input type="text" id="id" placeholder="ID" readonly>
-    <button onclick="generateID()">Gerar ID</button>
-    <input type="date" id="data_chegada" value="2025-01-01" readonly>
+    <input type="date" id="data_chegada" value="2025-01-01" min="2025-01-01" max="2025-12-31">
     <input type="number" id="quantidade" placeholder="Quantidade">
     <button onclick="addProduct()">Cadastrar Produto</button>
 
